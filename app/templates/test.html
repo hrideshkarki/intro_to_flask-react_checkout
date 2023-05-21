@@ -1,0 +1,13 @@
+{% for post in posts %}
+        <div class="card" style="width: 18rem;" >
+            <a class="text-dark text-decoration-none" href="{{ url_for('getPost', post_id=post.id) }}">
+                <img src="{{ post.img_url }}" class="card-img-top" alt="{{ post.title }}">
+                <div class="card-body">
+                <h5 class="card-title">{{ post.title }} - {{ post.author }}</h5>
+                <p class="card-text">{{ post.caption }}</p>
+                </div>
+            </a>
+            
+            <p>Like Count: {{ post.like_counter }} </p>
+        </div>
+    {% endfor %}

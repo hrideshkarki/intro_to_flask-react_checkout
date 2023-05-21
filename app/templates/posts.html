@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>All Posts</h1>
+<div class="row">
+    <div class="justify-content-center">
+            {% for p in posts %}
+                <a class="card text-decoration-none text-dark " style="width: 18rem;" href="{{ url_for('ig.showPost', post_id=p.id) }}">
+                    <img src="{{ p.img_url }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                    <h5 class="card-title">{{ p.title }} - {{ p.author.username }}</h5>
+                    <p class="card-text">{{ p.caption }}</p>
+                    <p class="card-text"><small class="text-body-secondary">Posted {{ moment(p.date_created).fromNow() }}</small></p>
+                    </div>
+                </a>
+                {% if current_user.is_authenticated %}
+                    {% if current_user in p.likers %}
+                        <a href='{{ url_for("ig.unlikePost", post_id=p.id)  }}' class="text-decoration-none my-heart material-symbols-outlined" style="font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 48">
+                            favorite
+                            </a>
+                        {% else %}
+                        <a href='{{ url_for("ig.likePost", post_id=p.id) }}' class="text-decoration-none my-heart material-symbols-outlined">
+                            favorite
+                            </a>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+    </div>
+</div>
+
+
+
+{% endblock %}

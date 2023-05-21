@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+    <h1>CONTACT PAGE</h1>
+    <ul class="list-group">
+    {% for user in users %}
+        {% if current_user.is_authenticated and user.id != current_user.id %}
+        <li class="list-group-item">{{ user.username }}
+            {% if not user.following %}
+                <a href="{{ url_for('followUser', user_id = user.id) }}" class="btn btn-primary">Follow</a>
+            {% else %}
+                <a href="{{ url_for('unfollowUser', user_id = user.id) }}" class="btn btn-danger">Unfollow</a>
+            {% endif %}
+        </li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+
+
+{% endblock %}

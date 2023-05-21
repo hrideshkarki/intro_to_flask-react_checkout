@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>News Page</h1>
+<div class="row">
+    {% for a in articles %}
+        <div class="card" style="width: 18rem;">
+            <img src="{{ a.urlToImage }}" class="card-img-top" alt="...">
+            <div class="card-body">
+            <h5 class="card-title">{{ a['title'] }}</h5>
+            <p class="card-text">{{ a.description }}</p>
+            <a href="{{ a.url }}" target='_blank' class="btn btn-primary">Go to article</a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
